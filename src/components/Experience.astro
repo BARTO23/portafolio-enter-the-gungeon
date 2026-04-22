@@ -50,7 +50,13 @@ const experience = [
                 </div>
 
                 <p class="text-[#4cc9f0] font-heading font-medium">{exp.company}</p>
-                <p class="text-[#a0a0b0] text-sm">📍 {exp.location}</p>
+                <p class="text-[#a0a0b0] text-sm">
+                  <svg class="w-4 h-4 inline mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; vertical-align: middle;">
+                    <path d="M21 10c0 7-9 9-9 9s-9-2-9-9"/>
+                    <path d="M3.54 16.12a2.268 2.268 0 0 1-.24-2.52c.33-.97 1.1-1.6 2.03-1.6h10.46c.93 0 1.7.63 2.03 1.6.17.87.08 1.76-.24 2.52-.48 1.15-1.7 2.36-3.25 2.36s-2.77-1.21-3.25-2.36z"/>
+                  </svg>
+                  {exp.location}
+                </p>
 
                 <ul class="mt-4 space-y-2 text-[#a0a0b0] text-sm">
                   {exp.achievements.map((achievement) => (
