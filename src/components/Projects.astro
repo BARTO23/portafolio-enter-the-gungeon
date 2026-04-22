@@ -1,0 +1,139 @@
+---
+const projects = [
+  {
+    name: "adk-rag-agent",
+    description: "Agente RAG construida con Google ADK y Vertex AI para consulta semántica en lenguaje natural sobre documentos.",
+    tech: ["Python", "Google ADK", "Vertex AI", "Google Drive"],
+    github: "https://github.com/BARTO23/adk-rag-agent",
+    stars: 0
+  },
+  {
+    name: "hackathon-uraba-2025",
+    description: "Plataforma desarrollada para hackathon. Frontend en Next.js con backend en Flask.",
+    tech: ["Next.js", "Flask", "JavaScript", "Python"],
+    github: "https://github.com/BARTO23/hackathon-uraba-2025",
+    stars: 2
+  },
+  {
+    name: "HackathonUraba2024",
+    description: "Proyecto fullstack desarrollado para hackathon regional con JavaScript y Python.",
+    tech: ["JavaScript", "Python", "Fullstack"],
+    github: "https://github.com/BARTO23/HackathonUraba2024",
+    stars: 3
+  }
+];
+---
+
+<section id="projects" class="min-h-screen py-20 px-4 relative" style="width: 100%;">
+  <div class="absolute inset-0" style="background: linear-gradient(to bottom, #0a0a12, #12121f, #0a0a12);"></div>
+
+  <div class="max-w-5xl mx-auto relative z-10" style="max-width: 64rem; margin: 0 auto; width: 100%;">
+    <h2 class="font-pixel text-4xl md:text-5xl text-gold text-center mb-4 drop-shadow-[0_0_20px_rgba(244,162,97,0.3)]">
+      QUEST LOG
+    </h2>
+    <p class="text-[#a0a0b0] text-center mb-12 font-heading">
+      Mis proyectos y contribuciones
+    </p>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.map((project, index) => (
+        <div class="project-card group">
+          <div class="card-content h-full border-3 border-[#2a2a4a] bg-[#12121f] p-6 relative overflow-hidden">
+            <!-- Fondo decorativo -->
+            <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#f4a261]/5 to-transparent"></div>
+
+            <div class="relative z-10">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="font-pixel text-lg text-white group-hover:text-gold transition-colors">
+                  {project.name}
+                </h3>
+                <div class="flex items-center text-gold">
+                  <span class="text-sm">★</span>
+                  <span class="text-sm ml-1">{project.stars}</span>
+                </div>
+              </div>
+
+              <p class="text-[#a0a0b0] text-sm mb-4 leading-relaxed">
+                {project.description}
+              </p>
+
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.tech.map((t) => (
+                  <span class="tech-tag text-xs px-2 py-1 bg-[#2a2a4a] text-[#a0a0b0]">
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center text-gold hover:text-white transition-colors text-sm group/link"
+              >
+                <span>View on GitHub</span>
+                <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Efecto de hover -->
+            <div class="card-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .project-card {
+    perspective: 1000px;
+  }
+
+  .card-content {
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+
+  .card-content:hover {
+    transform: translateY(-8px) rotateX(2deg);
+    border-color: #f4a261;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(244, 162, 97, 0.1);
+  }
+
+  .tech-tag {
+    clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px);
+    transition: all 0.2s ease;
+  }
+
+  .tech-tag:hover {
+    background: #f4a261;
+    color: #0a0a12;
+  }
+
+  .card-glow {
+    background: radial-gradient(circle at 50% 0%, rgba(244, 162, 97, 0.1) 0%, transparent 70%);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".project-card", {
+    scrollTrigger: {
+      trigger: "#projects",
+      start: "top 60%",
+    },
+    opacity: 0,
+    y: 60,
+    duration: 0.8,
+    stagger: 0.2,
+    ease: "power3.out"
+  });
+</script>

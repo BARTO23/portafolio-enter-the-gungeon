@@ -1,0 +1,158 @@
+---
+---
+
+<section id="hero" class="relative h-screen overflow-hidden flex items-center justify-center">
+  <!-- Capas de parallax -->
+  <div class="parallax-bg layer-0" data-speed="0.1" style="position: absolute; top: 0; left: 0; width: 100%; height: 120%; will-change: transform;">
+    <img src="/assets/6_Enter-the-Gungeon.webp" alt="Fondo" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.4;" />
+  </div>
+
+  <div class="parallax-bg layer-1" data-speed="0.2" style="position: absolute; top: 0; left: 0; width: 100%; height: 120%; will-change: transform;">
+    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent, rgba(10,10,18,0.3), #0a0a12);"></div>
+  </div>
+
+  <!-- Partículas flotantes estilo Gungeon -->
+  <div class="particles-container absolute inset-0 pointer-events-none overflow-hidden">
+    <div class="bullet particle" style="top: 20%; left: -10%; animation-delay: 0s;"></div>
+    <div class="bullet particle" style="top: 40%; left: -10%; animation-delay: 2s;"></div>
+    <div class="bullet particle" style="top: 60%; left: -10%; animation-delay: 4s;"></div>
+    <div class="bullet particle" style="top: 80%; left: -10%; animation-delay: 1s;"></div>
+    <div class="bullet particle" style="top: 30%; left: -10%; animation-delay: 3s;"></div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="relative z-10 text-center px-4">
+    <div class="hero-content opacity-0 translate-y-8">
+      <h1 class="font-pixel text-5xl md:text-7xl lg:text-8xl text-gold drop-shadow-[0_0_30px_rgba(244,162,97,0.5)] mb-4">
+        JUAN TOBAR
+      </h1>
+      <p class="font-heading text-xl md:text-2xl text-[#a0a0b0] mb-8 tracking-wider">
+        DATA ENGINEER <span class="text-[#e63946]">|</span> DEVELOPER
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#about" class="pixel-button group">
+          <span class="relative z-10">START GAME</span>
+          <div class="absolute inset-0 bg-[#e63946] opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+        </a>
+        <a href="#projects" class="pixel-button-outline group">
+          <span class="relative z-10">VIEW PROJECTS</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Indicador de scroll -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+    <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    will-change: transform;
+  }
+
+  .bullet {
+    position: absolute;
+    width: 8px;
+    height: 4px;
+    background: linear-gradient(90deg, #f4a261, #e63946);
+    border-radius: 2px;
+    animation: bullet-float 8s linear infinite;
+    box-shadow: 0 0 10px #f4a261;
+  }
+
+  @keyframes bullet-float {
+    0% {
+      transform: translateX(-100px) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(calc(100vw + 100px)) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .pixel-button {
+    position: relative;
+    padding: 12px 32px;
+    font-family: 'Enter the Gungeon', monospace;
+    font-size: 1rem;
+    color: #eaeaea;
+    background: linear-gradient(180deg, #2a2a4a 0%, #1a1a2e 100%);
+    border: 3px solid #f4a261;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  }
+
+  .pixel-button:hover {
+    background: linear-gradient(180deg, #3a3a5a 0%, #2a2a4a 100%);
+    box-shadow: 0 0 20px rgba(244, 162, 97, 0.5);
+    transform: scale(1.05);
+  }
+
+  .pixel-button-outline {
+    position: relative;
+    padding: 12px 32px;
+    font-family: 'Enter the Gungeon', monospace;
+    font-size: 1rem;
+    color: #f4a261;
+    background: transparent;
+    border: 3px solid #f4a261;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  }
+
+  .pixel-button-outline:hover {
+    background: rgba(244, 162, 97, 0.1);
+    box-shadow: 0 0 20px rgba(244, 162, 97, 0.3);
+    transform: scale(1.05);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Animación de entrada
+  gsap.to(".hero-content", {
+    opacity: 1,
+    y: 0,
+    duration: 1.5,
+    ease: "power3.out",
+    delay: 0.3
+  });
+
+  // Efecto parallax
+  const layers = document.querySelectorAll('.parallax-bg');
+  layers.forEach((layer) => {
+    const speed = parseFloat(layer.getAttribute('data-speed') || '0.1');
+    gsap.to(layer, {
+      y: () => window.innerHeight * speed,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+  });
+</script>

@@ -1,0 +1,118 @@
+---
+const experience = [
+  {
+    company: "Globant",
+    role: "Data Engineer Junior",
+    location: "Medellín, Colombia",
+    period: "Julio 2025 - Enero 2026",
+    achievements: [
+      "Desarrollé de forma autónoma un pipeline ETL end-to-end consumiendo datos meteorológicos desde una API pública, transformándolos con Python y almacenándolos en Amazon S3",
+      "Construí un agente RAG usando Google ADK y Vertex AI para consulta semántica en lenguaje natural sobre documentos almacenados en Google Drive y GCS",
+      "Formación intensiva en Python, SQL, PySpark, Apache Airflow y Docker aplicada a flujos de ingeniería de datos",
+      "Trabajo bajo metodología Scrum en un entorno de equipo técnico"
+    ],
+    color: "#4cc9f0"
+  }
+];
+---
+
+<section id="experience" class="min-h-screen py-20 px-4 relative" style="width: 100%;">
+  <div class="absolute inset-0" style="background-color: #0a0a12;"></div>
+
+  <div class="max-w-4xl mx-auto relative z-10" style="max-width: 56rem; margin: 0 auto; width: 100%;">
+    <h2 class="font-pixel text-4xl md:text-5xl text-gold text-center mb-4 drop-shadow-[0_0_20px_rgba(244,162,97,0.3)]">
+      JOURNEY
+    </h2>
+    <p class="text-[#a0a0b0] text-center mb-12 font-heading">
+      Mi experiencia profesional
+    </p>
+
+    <div class="timeline relative">
+      <!-- Línea central -->
+      <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#f4a261] via-[#e63946] to-[#f4a261]"></div>
+
+      {experience.map((exp, index) => (
+        <div class={`timeline-item relative mb-12 ${index % 2 === 0 ? 'md:pr-8 md:text-right' : 'md:pl-8 md:ml-auto md:translate-y-16'}`}>
+          <div class={`timeline-card ml-12 md:ml-0 ${index % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'}`}>
+            <div class="card-content p-6 border-3 border-[#2a2a4a] bg-[#12121f]">
+              <!-- Indicador en la línea -->
+              <div class="timeline-dot absolute w-4 h-4 rounded-full border-3 border-[#f4a261] bg-[#0a0a12]"
+                   style={`left: ${index % 2 === 0 ? '-2.25rem' : 'auto'}; right: ${index % 2 === 0 ? 'auto' : '-2.25rem'};`}>
+                <div class="absolute inset-0 rounded-full animate-pulse" style={`background: ${exp.color}`}></div>
+              </div>
+
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center justify-between flex-wrap gap-2">
+                  <h3 class="font-pixel text-lg text-white">{exp.role}</h3>
+                  <span class="text-xs px-3 py-1 bg-[#f4a261]/20 text-gold border border-[#f4a261]/30">
+                    {exp.period}
+                  </span>
+                </div>
+
+                <p class="text-[#4cc9f0] font-heading font-medium">{exp.company}</p>
+                <p class="text-[#a0a0b0] text-sm">📍 {exp.location}</p>
+
+                <ul class="mt-4 space-y-2 text-[#a0a0b0] text-sm">
+                  {exp.achievements.map((achievement) => (
+                    <li class="flex items-start gap-2">
+                      <span class="text-[#e63946] mt-1">▸</span>
+                      <span>{achievement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline-card {
+    max-width: 500px;
+  }
+
+  .card-content {
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+    transition: all 0.3s ease;
+  }
+
+  .card-content:hover {
+    border-color: #f4a261;
+    box-shadow: 0 0 30px rgba(244, 162, 97, 0.15);
+    transform: translateX(8px);
+  }
+
+  .timeline-dot {
+    top: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-dot {
+      left: 50% !important;
+      right: auto !important;
+      transform: translateX(-50%);
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".timeline-item", {
+    scrollTrigger: {
+      trigger: "#experience",
+      start: "top 60%",
+    },
+    opacity: 0,
+    x: -30,
+    duration: 0.8,
+    stagger: 0.3,
+    ease: "power3.out"
+  });
+</script>

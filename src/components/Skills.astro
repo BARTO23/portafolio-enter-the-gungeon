@@ -1,0 +1,152 @@
+---
+const skills = [
+  { name: "React", icon: "⚛", color: "#4cc9f0", level: 85 },
+  { name: "Vue", icon: "💚", color: "#42b883", level: 75 },
+  { name: "TypeScript", icon: "TS", color: "#3178c6", level: 80 },
+  { name: "Tailwind CSS", icon: "🌬", color: "#38bdf8", level: 90 },
+  { name: "Python", icon: "🐍", color: "#f4a261", level: 70 },
+  { name: "SQL", icon: "🗄", color: "#e63946", level: 65 },
+  { name: "Docker", icon: "🐳", color: "#2496ed", level: 60 },
+  { name: "Next.js", icon: "▲", color: "#a0a0b0", level: 75 },
+];
+---
+
+<section id="skills" class="min-h-screen py-20 px-4 relative" style="width: 100%;">
+  <!-- Fondo -->
+  <div class="absolute inset-0" style="background-color: #0a0a12;"></div>
+
+  <div class="max-w-5xl mx-auto relative z-10" style="max-width: 64rem; margin: 0 auto; width: 100%;">
+    <h2 class="font-pixel text-4xl md:text-5xl text-gold text-center mb-4 drop-shadow-[0_0_20px_rgba(244,162,97,0.3)]">
+      ARMORY
+    </h2>
+    <p class="text-[#a0a0b0] text-center mb-12 font-heading">
+      Mis habilidades y herramientas
+    </p>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {skills.map((skill) => (
+        <div class="skill-item group relative" data-color={skill.color}>
+          <div class="item-card p-4 h-full border-3 border-[#2a2a4a] bg-[#12121f] hover:border-[var(--item-color)] transition-all duration-300">
+            <div class="item-header flex items-center justify-between mb-3">
+              <span class="font-pixel text-2xl">{skill.icon}</span>
+              <span class="text-xs text-[#a0a0b0]">{skill.level}%</span>
+            </div>
+            <h3 class="font-pixel text-sm mb-2" style={`color: ${skill.color}`}>
+              {skill.name}
+            </h3>
+            <div class="progress-bar h-1 bg-[#2a2a4a] overflow-hidden">
+              <div
+                class="progress-fill h-full"
+                style={`width: 0%; background: ${skill.color};`}
+                data-width={skill.level}
+              ></div>
+            </div>
+          </div>
+          <div class="item-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+               style={`box-shadow: inset 0 0 30px ${skill.color}33;`}></div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Categorías adicionales -->
+    <div class="mt-12 grid md:grid-cols-3 gap-6">
+      <div class="category-card p-6 border-3 border-[#2a2a4a] bg-[#12121f]/50">
+        <h3 class="font-pixel text-lg text-[#e63946] mb-4">📦 BACKEND</h3>
+        <ul class="space-y-2 text-[#a0a0b0] text-sm">
+          <li>• Python (Flask, PySpark)</li>
+          <li>• Node.js / Express</li>
+          <li>• Google ADK</li>
+          <li>• Apache Airflow</li>
+        </ul>
+      </div>
+
+      <div class="category-card p-6 border-3 border-[#2a2a4a] bg-[#12121f]/50">
+        <h3 class="font-pixel text-lg text-[#4cc9f0] mb-4">☁️ CLOUD</h3>
+        <ul class="space-y-2 text-[#a0a0b0] text-sm">
+          <li>• AWS (S3)</li>
+          <li>• Google Cloud Platform</li>
+          <li>• Vertex AI</li>
+          <li>• Docker / Kubernetes</li>
+        </ul>
+      </div>
+
+      <div class="category-card p-6 border-3 border-[#2a2a4a] bg-[#12121f]/50">
+        <h3 class="font-pixel text-lg text-[#f4a261] mb-4">🛠️ TOOLS</h3>
+        <ul class="space-y-2 text-[#a0a0b0] text-sm">
+          <li>• Git / GitHub</li>
+          <li>• Scrum (Metodología)</li>
+          <li>• VS Code</li>
+          <li>• Figma (básico)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .skill-item {
+    --item-color: #f4a261;
+  }
+
+  .item-card {
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .item-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .progress-bar {
+    clip-path: polygon(4px 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .progress-fill {
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .category-card {
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+    transition: all 0.3s ease;
+  }
+
+  .category-card:hover {
+    border-color: #f4a261;
+    transform: translateY(-2px);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Animar items al entrar
+  gsap.from(".skill-item", {
+    scrollTrigger: {
+      trigger: "#skills",
+      start: "top 60%",
+    },
+    scale: 0.8,
+    opacity: 0,
+    duration: 0.6,
+    stagger: 0.1,
+    ease: "back.out(1.5)"
+  });
+
+  // Animar barras de progreso
+  gsap.utils.toArray(".progress-fill").forEach((fill: any) => {
+    const targetWidth = fill.getAttribute("data-width");
+    gsap.to(fill, {
+      width: targetWidth + "%",
+      duration: 1.5,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: "#skills",
+        start: "top 60%",
+      }
+    });
+  });
+</script>
